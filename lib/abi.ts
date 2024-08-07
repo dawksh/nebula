@@ -3,54 +3,133 @@ export const verifierAbi = [
         "type": "constructor",
         "inputs": [
             {
-                "name": "_worldId",
+                "name": "_verifier",
                 "type": "address",
-                "internalType": "contract IWorldID"
+                "internalType": "address"
             },
             {
-                "name": "_appId",
-                "type": "string",
-                "internalType": "string"
+                "name": "_registry",
+                "type": "address",
+                "internalType": "address"
             },
             {
-                "name": "_action",
-                "type": "string",
-                "internalType": "string"
+                "name": "_eas",
+                "type": "address",
+                "internalType": "address"
+            },
+            {
+                "name": "_easSchema",
+                "type": "bytes32",
+                "internalType": "bytes32"
             }
         ],
         "stateMutability": "nonpayable"
     },
     {
         "type": "function",
-        "name": "verifyAndExecute",
+        "name": "claimIdentity",
         "inputs": [
             {
-                "name": "signal",
+                "name": "proof",
+                "type": "tuple",
+                "internalType": "struct WorldIDProof",
+                "components": [
+                    {
+                        "name": "signal",
+                        "type": "address",
+                        "internalType": "address"
+                    },
+                    {
+                        "name": "root",
+                        "type": "uint256",
+                        "internalType": "uint256"
+                    },
+                    {
+                        "name": "nullifierHash",
+                        "type": "uint256",
+                        "internalType": "uint256"
+                    },
+                    {
+                        "name": "proof",
+                        "type": "bytes",
+                        "internalType": "bytes"
+                    }
+                ]
+            },
+            {
+                "name": "identity",
+                "type": "bytes8",
+                "internalType": "bytes8"
+            },
+            {
+                "name": "data",
                 "type": "bytes",
                 "internalType": "bytes"
-            },
-            {
-                "name": "root",
-                "type": "uint256",
-                "internalType": "uint256"
-            },
-            {
-                "name": "nullifierHash",
-                "type": "uint256",
-                "internalType": "uint256"
-            },
-            {
-                "name": "proof",
-                "type": "uint256[8]",
-                "internalType": "uint256[8]"
             }
         ],
         "outputs": [],
         "stateMutability": "nonpayable"
     },
     {
+        "type": "function",
+        "name": "revokeIdentity",
+        "inputs": [
+            {
+                "name": "identity",
+                "type": "bytes8",
+                "internalType": "bytes8"
+            },
+            {
+                "name": "user",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "verifyIdentity",
+        "inputs": [
+            {
+                "name": "identity",
+                "type": "bytes8",
+                "internalType": "bytes8"
+            },
+            {
+                "name": "user",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
         "type": "error",
-        "name": "InvalidNullifier",
+        "name": "IdentityAlreadyIssued",
+        "inputs": []
+    },
+    {
+        "type": "error",
+        "name": "IdentityNotIssued",
+        "inputs": []
+    },
+    {
+        "type": "error",
+        "name": "IrrevocableIdentity",
+        "inputs": []
+    },
+    {
+        "type": "error",
+        "name": "ResolverIssueFail",
         "inputs": []
     }
 ]
