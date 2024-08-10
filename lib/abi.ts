@@ -133,3 +133,63 @@ export const verifierAbi = [
         "inputs": []
     }
 ]
+
+export const registryABI = [
+    {
+        "type": "function",
+        "name": "register",
+        "inputs": [
+            {
+                "name": "identity",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bytes8",
+                "internalType": "bytes8"
+            }
+        ],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "resolve",
+        "inputs": [
+            {
+                "name": "identity",
+                "type": "bytes8",
+                "internalType": "bytes8"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "event",
+        "name": "IdentityRegistered",
+        "inputs": [
+            {
+                "name": "",
+                "type": "address",
+                "indexed": false,
+                "internalType": "address"
+            },
+            {
+                "name": "",
+                "type": "bytes8",
+                "indexed": true,
+                "internalType": "bytes8"
+            }
+        ],
+        "anonymous": false
+    }
+]

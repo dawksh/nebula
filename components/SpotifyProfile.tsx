@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
+import { useSignal } from '@/hooks/useSignal';
+import WorldIDVerifier from './shared/WorldIDVerifier';
 
 interface SpotifyUser {
     display_name: string;
@@ -30,6 +32,7 @@ interface SpotifyUser {
 
 const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
     const [profile, setProfile] = useState<SpotifyUser>();
+
     async function getProfile(accessToken: string) {
 
         const response = await fetch('https://api.spotify.com/v1/me', {
@@ -65,6 +68,8 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
             <span className='my-2'>
                 product: {profile.product}
             </span>
+
+            <WorldIDVerifier identifier='0x9149ce687bb421d6' />
         </div>
     )
 }

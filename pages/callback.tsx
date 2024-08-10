@@ -6,6 +6,7 @@ const Callback = () => {
     const { push } = useRouter()
     useEffect(() => {
         const callback = parseSpotifyCallback(window)
+        callback.expiry = Date.now() + 3600000
         localStorage.setItem("spotifyData", JSON.stringify(callback))
         push("/spotify")
     }, [])
