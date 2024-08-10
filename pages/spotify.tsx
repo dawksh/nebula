@@ -1,10 +1,18 @@
+import SpotifyProfile from "@/components/SpotifyProfile";
 import Button from "@/components/ui/button";
 import { generateRandomString } from "@/lib/utils";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
+type SpotifyCallback = {
+    access_token: string,
+    expires_in: string,
+    state: string,
+    token_type: string
+}
+
 const Spotify = () => {
-    const [spotify, setSpotify] = useState();
+    const [spotify, setSpotify] = useState<SpotifyCallback>();
     const generateUrl = () => {
         var client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT as string;
         var redirect_uri =
@@ -32,12 +40,17 @@ const Spotify = () => {
         <div
             className={`flex items-center justify-center font-semibold flex-col`}
         >
-            <div>verify and get onchain spotify id</div>
+            <div className="font-bold">verify and get onchain spotify id</div>
             {!spotify && (
                 <Button className="my-4" onClick={() => { }}>
                     <Link href={generateUrl()}>sign in</Link>
                 </Button>
             )}
+            {
+                spotify && (
+                    <SpotifyProfile accessToken={spotify.access_token} />
+                )
+            }
         </div>
     );
 };
