@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import { useSignal } from '@/hooks/useSignal';
 import WorldIDVerifier from './shared/WorldIDVerifier';
+import axios from "axios";
 
 interface SpotifyUser {
     display_name: string;
@@ -31,7 +31,17 @@ interface SpotifyUser {
 }
 
 const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
+
     const [profile, setProfile] = useState<SpotifyUser>();
+    const [proofData, setProofData] = useState<string>("");
+
+    useEffect(() => {
+        const getProfileProof = async () => {
+            const { data } = await axios.get(`/api/signSpotify?spotifyId=${profile?.id}`)
+            setProofData(data.encodedData)
+        }
+        if (profile?.id) getProfileProof()
+    }, [profile])
 
     async function getProfile(accessToken: string) {
 
@@ -69,7 +79,7 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
                 product: {profile.product}
             </span>
 
-            <WorldIDVerifier identifier='0x9149ce687bb421d6' />
+            {proofData && <WorldIDVerifier identifier='0x337f034ec09d4dda' data={proofData} />}
         </div>
     )
 }
