@@ -1,26 +1,18 @@
-import { Inter } from 'next/font/google'
+import { Inter, Public_Sans } from 'next/font/google'
 import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit'
 import Button from '@/components/ui/button'
 import { useAccount, useWriteContract } from "wagmi";
 import { decodeAbiParameters, hexToBigInt, getAddress } from "viem"
 import { verifierAbi } from '@/lib/abi';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 
 const inter = Inter({ subsets: ['latin'] })
+const public_sans = Public_Sans({ subsets: ['latin'] })
 
 export default function Home() {
   const { address } = useAccount()
-
-  const [signal, setSignal] = useState(0)
-
-  useEffect(() => {
-    if (address) {
-      const rand = Math.floor(Math.random() * 1000000000000000);
-      setSignal(rand)
-      console.log("Signal", rand)
-    }
-  }, [address])
 
   const { writeContractAsync } = useWriteContract()
 
@@ -33,32 +25,29 @@ export default function Home() {
       functionName: "verifyAndExecute",
       args: ["0x212655787144F5e1D37cC3379F9ec1840639CE23", root, nullifier, proof]
     })
-    console.log(hash)
   }
+
+  const { push } = useRouter()
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between p-24 ${public_sans.className}`}
     >
       {address &&
         <IDKitWidget
           app_id={process.env.NEXT_PUBLIC_APP_ID as any}
           action={process.env.NEXT_PUBLIC_APP_ACTION as string}
           onSuccess={async (res) => {
-            console.log(res)
-            console.log("Root", res.merkle_root)
-            console.log("Nullifier", res.nullifier_hash)
-            console.log("Proof", res.proof)
-            console.log("Signal", signal)
             await callVerifyContract(res.merkle_root, res.nullifier_hash, res.proof)
           }}
           verification_level={VerificationLevel.Orb}
-          signal={"0x212655787144F5e1D37cC3379F9ec1840639CE23"}
+          signal={"0x6AEd7bEE61Ab97e6f371342F9F5858024be8CA34"}
         >
           {({ open }) =>
             <Button onClick={open}>Verify with World ID</Button>
           }
         </IDKitWidget>}
+      <Button onClick={() => push("/spotify")}>spotify</Button>
     </main>
   )
 }

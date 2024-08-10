@@ -4,19 +4,18 @@ import { ThemeProvider } from '@/components/ui/themeProvider'
 import Navbar from '@/components/shared/Navbar'
 
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet, baseSepolia, optimismSepolia } from "wagmi/chains";
+import { optimismSepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { public_sans } from '@/lib/utils';
 
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [baseSepolia, optimismSepolia],
+    chains: [optimismSepolia],
     transports: {
       // RPC URL for each chain
-      [baseSepolia.id]: http(
-        `https://base-sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
-      ),
+
       [optimismSepolia.id]: http(
         `https://optimism-sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
       ),
@@ -37,7 +36,7 @@ const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div>
+    <div className={public_sans.className}>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <ConnectKitProvider>
