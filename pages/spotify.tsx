@@ -2,6 +2,8 @@ import SpotifyProfile from "@/components/SpotifyProfile";
 import Button from "@/components/ui/button";
 import { generateRandomString } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 type SpotifyCallback = {
@@ -18,7 +20,7 @@ const Spotify = () => {
     const generateUrl = () => {
         var client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT as string;
         var redirect_uri =
-            "https://0fd0-103-214-61-194.ngrok-free.app/callback";
+            `https://nebula-protocol.vercel.app/callback`;
 
         var state = generateRandomString(16);
 
