@@ -19,7 +19,7 @@ const WorldIDVerifier = ({ identifier, data }: { identifier: string, data: strin
                     toast.success('Identity Claimed: ', {
                         action: {
                             label: 'View Transaction',
-                            onClick: () => window.open(`https://optimism-sepolia.etherscan.io/tx/${hash}`)
+                            onClick: () => window.open(`https://sepolia-optimism.etherscan.io/tx/${hash}`)
                         },
                     })
                 }}
