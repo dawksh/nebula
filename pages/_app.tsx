@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { public_sans } from '@/lib/utils';
 
+import { Toaster } from "@/components/ui/sonner"
+
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
@@ -44,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
               attribute="class"
               defaultTheme="dark">
               <Navbar />
+              <Toaster />
               <Component {...pageProps} />
             </ThemeProvider>
           </ConnectKitProvider>
