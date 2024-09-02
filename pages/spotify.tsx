@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 type SpotifyCallback = {
     access_token: string,
@@ -56,7 +57,9 @@ const Spotify = () => {
         >
             <div className="font-bold">verify and get onchain spotify id</div>
             {!isValid && (
-                <Button className="my-4" onClick={() => { }}>
+                <Button className="my-4" onClick={() => {
+                    toast.loading("Sending Claim Transaction", { duration: 10000 })
+                }}>
                     <Link href={generateUrl()}>sign in</Link>
                 </Button>
             )}
