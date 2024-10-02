@@ -70,7 +70,6 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
     const { identityAddress, data } = useNebulaDataRead(address as `0x${string}`, "0x5893d26aac413b1d")
     const { claimNebula, hash } = useNebulaWrite("0x5893d26aac413b1d")
 
-
     if (!profile) return (
         <div>
             Spotify Profile
@@ -90,13 +89,13 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
             <span className='my-2'>
                 product: {profile.product}
             </span>
-            {data == "0x" ? <Button onClick={() => {
+            {!data || data == "0x" ? <Button onClick={() => {
                 claimNebula("0x5893d26aac413b1d", proofData)
             }}>publish on nebula</Button> : (
                 <div>
                     verified id: {hexToString(data as Hex)}
                     <br />
-                    visit here: <Link href={`https://open.spotify.com/user/${hexToString(data as Hex)}`}>click</Link>
+                    visit here: <Link href={`https://open.spotify.com/user/${hexToString(data as Hex)}`} target='_blank'>click</Link>
                 </div>
             )}
         </div>

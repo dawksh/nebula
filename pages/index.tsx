@@ -17,9 +17,8 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-center p-24 ${public_sans.className}`}
     >
       <h1 className='text-3xl font-bold mb-16'>nebula protocol</h1>
-      <h3>choose from a range of verifiers available:</h3>
       <Button className="m-4" onClick={() => push("/spotify")}>spotify verifier</Button>
-      <Button className="m-4" onClick={() => push("/nft")}>nft verifier</Button>
+      <p className='my-4 text-sm'>spotify verifier available for now</p>
     </main>
   )
 }
