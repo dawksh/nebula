@@ -161,3 +161,115 @@ export const registryABI = [
         "anonymous": false
     }
 ]
+
+export const spotifyResolverABI = [
+    {
+        "type": "constructor",
+        "inputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "issue",
+        "inputs": [
+            {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+            },
+            {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "revoke",
+        "inputs": [
+            {
+                "name": "",
+                "type": "address",
+                "internalType": "address"
+            },
+            {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool"
+            }
+        ],
+        "stateMutability": "pure"
+    },
+    {
+        "type": "function",
+        "name": "updateOwner",
+        "inputs": [
+            {
+                "name": "newOwner",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "userData",
+        "inputs": [
+            {
+                "name": "user",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "verify",
+        "inputs": [
+            {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+            },
+            {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool"
+            }
+        ],
+        "stateMutability": "view"
+    }
+]

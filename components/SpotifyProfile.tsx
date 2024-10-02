@@ -4,6 +4,10 @@ import WorldIDVerifier from './shared/WorldIDVerifier';
 import axios from "axios";
 import Button from './ui/button';
 import { useNebulaWrite } from '@/hooks/useNebulaWrite';
+import { useNebulaDataRead } from '@/hooks/useNebulaDataRead';
+import { useAccount } from 'wagmi';
+import { bytesToString, Hex, hexToString } from 'viem';
+import Link from 'next/link';
 
 interface SpotifyUser {
     display_name: string;
@@ -56,11 +60,16 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
 
         setProfile(data)
     }
+    const { address } = useAccount()
+
 
     useEffect(() => {
         if (accessToken) getProfile(accessToken)
     }, [])
-    const { claimNebula, hash } = useNebulaWrite("0x6ab1d4aa84d732b")
+
+    const { identityAddress, data } = useNebulaDataRead(address as `0x${string}`, "0x5893d26aac413b1d")
+    const { claimNebula, hash } = useNebulaWrite("0x5893d26aac413b1d")
+
 
     if (!profile) return (
         <div>
@@ -81,9 +90,15 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
             <span className='my-2'>
                 product: {profile.product}
             </span>
-            <Button onClick={() => {
-                claimNebula("0x6ab1d4aa84d732b", proofData)
-            }}>publish on nebula</Button>
+            {data == "0x" ? <Button onClick={() => {
+                claimNebula("0x5893d26aac413b1d", proofData)
+            }}>publish on nebula</Button> : (
+                <div>
+                    verified id: {hexToString(data as Hex)}
+                    <br />
+                    visit here: <Link href={`https://open.spotify.com/user/${hexToString(data as Hex)}`}>click</Link>
+                </div>
+            )}
         </div>
     )
 }
