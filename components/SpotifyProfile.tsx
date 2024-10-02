@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import WorldIDVerifier from './shared/WorldIDVerifier';
 import axios from "axios";
+import Button from './ui/button';
+import { useNebulaWrite } from '@/hooks/useNebulaWrite';
 
 interface SpotifyUser {
     display_name: string;
@@ -58,12 +60,14 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
     useEffect(() => {
         if (accessToken) getProfile(accessToken)
     }, [])
+    const { claimNebula, hash } = useNebulaWrite("0x6ab1d4aa84d732b")
 
     if (!profile) return (
         <div>
             Spotify Profile
         </div>
     )
+
 
     return (
         <div className='flex justify-center items-center my-2 px-4 py-2 rounded-md flex-col'>
@@ -77,8 +81,9 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
             <span className='my-2'>
                 product: {profile.product}
             </span>
-
-            {proofData && <WorldIDVerifier identifier='0x337f034ec09d4dda' data={proofData} />}
+            <Button onClick={() => {
+                claimNebula("0x6ab1d4aa84d732b", proofData)
+            }}>publish on nebula</Button>
         </div>
     )
 }

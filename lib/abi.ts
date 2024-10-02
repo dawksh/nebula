@@ -3,11 +3,6 @@ export const verifierAbi = [
         "type": "constructor",
         "inputs": [
             {
-                "name": "_verifier",
-                "type": "address",
-                "internalType": "address"
-            },
-            {
                 "name": "_registry",
                 "type": "address",
                 "internalType": "address"
@@ -29,33 +24,6 @@ export const verifierAbi = [
         "type": "function",
         "name": "claimIdentity",
         "inputs": [
-            {
-                "name": "proof",
-                "type": "tuple",
-                "internalType": "struct WorldIDProof",
-                "components": [
-                    {
-                        "name": "signal",
-                        "type": "address",
-                        "internalType": "address"
-                    },
-                    {
-                        "name": "root",
-                        "type": "uint256",
-                        "internalType": "uint256"
-                    },
-                    {
-                        "name": "nullifierHash",
-                        "type": "uint256",
-                        "internalType": "uint256"
-                    },
-                    {
-                        "name": "proof",
-                        "type": "bytes",
-                        "internalType": "bytes"
-                    }
-                ]
-            },
             {
                 "name": "identity",
                 "type": "bytes8",
