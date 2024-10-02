@@ -21,7 +21,7 @@ const Spotify = () => {
     const generateUrl = () => {
         var client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT as string;
         var redirect_uri =
-            `https://nebula-protocol.vercel.app/callback`;
+            `https://0fd0-103-214-61-194.ngrok-free.app/callback`;
 
         var state = generateRandomString(16);
 

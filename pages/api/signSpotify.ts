@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { encodeAbiParameters, toHex, parseSignature, keccak256, hashMessage } from 'viem';
+import { encodeAbiParameters, toHex, parseSignature, keccak256, hashMessage, stringToBytes, stringToHex } from 'viem';
 import { privateKeyToAccount } from "viem/accounts"
 
 export type signatureData = {
@@ -26,12 +26,13 @@ export default async function handler(
 
     const encodedData = encodeAbiParameters(
         [
+            { name: 'data', type: 'bytes' },
             { name: 'hash', type: 'bytes32' },
             { name: 'r', type: 'bytes32' },
             { name: 's', type: 'bytes32' },
             { name: 'v', type: 'uint8' }
         ],
-        [hashMessage(hash) as `0x${string}`, r as `0x${string}`, s as `0x${string}`, Number(v)]
+        [stringToHex(spotifyId as string), hashMessage(hash) as `0x${string}`, r as `0x${string}`, s as `0x${string}`, Number(v)]
     )
 
     res.status(200).json({

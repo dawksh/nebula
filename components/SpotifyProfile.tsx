@@ -50,7 +50,6 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
                 Authorization: 'Bearer ' + accessToken
             }
         });
-
         const data = await response.json();
 
         setProfile(data)

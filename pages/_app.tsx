@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/ui/themeProvider'
 import Navbar from '@/components/shared/Navbar'
 
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { optimismSepolia } from "wagmi/chains";
+import { baseSepolia, optimismSepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { public_sans } from '@/lib/utils';
@@ -14,7 +14,7 @@ import { Toaster } from "@/components/ui/sonner"
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [optimismSepolia],
+    chains: [baseSepolia],
     transports: {
       // RPC URL for each chain
 
