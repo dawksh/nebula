@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import WorldIDVerifier from './shared/WorldIDVerifier';
 import axios from "axios";
 import Button from './ui/button';
 import { useNebulaWrite } from '@/hooks/useNebulaWrite';
 import { useNebulaDataRead } from '@/hooks/useNebulaDataRead';
 import { useAccount } from 'wagmi';
-import { bytesToString, Hex, hexToString } from 'viem';
+import { Hex, hexToString } from 'viem';
 import Link from 'next/link';
 
 interface SpotifyUser {

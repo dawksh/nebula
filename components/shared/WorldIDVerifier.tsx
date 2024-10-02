@@ -15,13 +15,6 @@ const WorldIDVerifier = ({ identifier, data }: { identifier: string, data: strin
                 app_id={process.env.NEXT_PUBLIC_APP_ID as any}
                 action={process.env.NEXT_PUBLIC_APP_ACTION as string}
                 onSuccess={async (res) => {
-                    const hash = await claimNebula(identifier, hexToBigInt(res.merkle_root as `0x${string}`), hexToBigInt(res.nullifier_hash as `0x${string}`), res.proof, data)
-                    toast.success('Identity Claimed: ', {
-                        action: {
-                            label: 'View Transaction',
-                            onClick: () => window.open(`https://sepolia-optimism.etherscan.io/tx/${hash}`)
-                        },
-                    })
                 }}
                 verification_level={VerificationLevel.Orb}
                 signal={signal}
