@@ -31,7 +31,7 @@ export default async function handler(
         };
     });
 
-    redis.set(address, JSON.stringify(artistData));
+    redis.set(address, JSON.stringify({ artistData, timestamp: Date.now() }));
 
     res.status(200).json({
         address, artistData
