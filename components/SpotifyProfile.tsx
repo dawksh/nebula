@@ -7,6 +7,7 @@ import { useNebulaDataRead } from '@/hooks/useNebulaDataRead';
 import { useAccount } from 'wagmi';
 import { Hex, hexToString } from 'viem';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 interface SpotifyUser {
     display_name: string;
@@ -37,7 +38,7 @@ interface SpotifyUser {
 
 const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
 
-    const [profile, setProfile] = useState<SpotifyUser>();
+    const [profile, setProfile] = useState<SpotifyUser | null>();
     const [proofData, setProofData] = useState<string>("");
 
     useEffect(() => {
@@ -61,17 +62,26 @@ const SpotifyProfile = ({ accessToken }: { accessToken: string }) => {
     }
     const { address } = useAccount()
 
+    const updateData = async (accessToken: string, address: string) => {
+        const res = await axios.post("/api/updateSpotify", {
+            accessToken, address
+        })
+        if (res.status != 200) toast("Error updating artist data")
+    }
 
     useEffect(() => {
-        if (accessToken) getProfile(accessToken)
-    }, [])
+        if (accessToken && address) {
+            getProfile(accessToken)
+            updateData(accessToken, address as string)
+        }
+    }, [accessToken, address])
 
     const { identityAddress, data } = useNebulaDataRead(address as `0x${string}`, "0x5893d26aac413b1d")
     const { claimNebula, hash } = useNebulaWrite("0x5893d26aac413b1d")
 
     if (!profile) return (
         <div>
-            Spotify Profile
+            Could not get spotify id or wallet isn&apos;t connected
         </div>
     )
 

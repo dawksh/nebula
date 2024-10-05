@@ -2,8 +2,6 @@ import SpotifyProfile from "@/components/SpotifyProfile";
 import Button from "@/components/ui/button";
 import { generateRandomString } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -25,7 +23,7 @@ const Spotify = () => {
 
         var state = generateRandomString(16);
 
-        var scope = "user-read-private user-read-email";
+        var scope = "user-read-private user-read-email user-top-read";
 
         var url = "https://accounts.spotify.com/authorize";
         url += "?response_type=token";
