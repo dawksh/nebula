@@ -17,7 +17,7 @@ export default async function handler(
     })
 
     const { accessToken, address } = req.body;
-    console.log(accessToken, address)
+
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=3', {
         headers: {
             Authorization: `Bearer ${accessToken}`
