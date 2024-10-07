@@ -19,7 +19,7 @@ const Spotify = () => {
     const generateUrl = () => {
         var client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT as string;
         var redirect_uri =
-            `https://0fd0-103-214-61-194.ngrok-free.app/callback`;
+            `${window.location.origin}/callback`;
 
         var state = generateRandomString(16);
 
