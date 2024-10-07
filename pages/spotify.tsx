@@ -2,6 +2,7 @@ import SpotifyProfile from "@/components/SpotifyProfile";
 import Button from "@/components/ui/button";
 import { generateRandomString } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -19,7 +20,7 @@ const Spotify = () => {
     const generateUrl = () => {
         var client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT as string;
         var redirect_uri =
-            `${window.location.origin}/callback`;
+            `${process.env.NEXT_PUBLIC_HOST}/callback`;
 
         var state = generateRandomString(16);
 
